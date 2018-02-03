@@ -2,6 +2,23 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.utils.translation import ugettext_lazy as _
+from uuid import uuid4
+import os
+
+
+def path_and_rename(path):
+    def wrapper(instance, filename):
+        ext = filename.split('.')[-1]
+        # get filename
+        if instance.pk:
+            filename = '{}.{}'.format(instance.pk, ext)
+        else:
+            # set filename as random string
+            filename = '{}.{}'.format(uuid4().hex, ext)
+        # return the whole path to the file
+        return os.path.join(path, filename)
+
+    return wrapper
 
 
 class UserManager(UserManager):
@@ -45,7 +62,7 @@ class User(AbstractUser):
 
     username = None
     email = models.EmailField(_('correo'), unique=True)
-    foto = models.ImageField(null=True, blank=True)
+    foto = models.ImageField(null=True, blank=True, upload_to=path_and_rename('uploads/'))
     direccion = models.CharField(null=True, blank=True, max_length=255)
     pais = models.CharField(null=False, blank=False, max_length=100)
     favoritas = models.ManyToManyField('Categoria', blank=True)
@@ -81,11 +98,11 @@ class Promocion(models.Model):
         verbose_name_plural = "promociones"
 
     def __str__(self):
-        return self.nombre+" ("+str(self.id)+")"
+        return self.nombre + " (" + str(self.id) + ")"
 
     nombre = models.CharField(null=False, blank=False, max_length=250)
     descripcion = models.TextField(null=False, blank=False)
-    imagen = models.ImageField(null=True, blank=True)
+    imagen = models.ImageField(null=True, blank=True, upload_to=path_and_rename('uploads/'))
     precio = models.FloatField(null=False, blank=False)
     fechaInicio = models.DateField(null=False, blank=False)
     fechaFin = models.DateField(null=True, blank=True)
@@ -102,5 +119,3 @@ class Comentario(models.Model):
     texto = models.TextField(null=False, blank=False)
     correo = models.EmailField(null=False, blank=False)
     promocion = models.ForeignKey('Promocion', related_name='comentarios', null=True, on_delete=models.CASCADE)
-
-
