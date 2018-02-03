@@ -45,6 +45,7 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(_('correo'), unique=True)
 
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -62,8 +63,8 @@ class Comentario(models.Model):
     def __str__(self):
         return 'id:' + str(self.id)
 
-    texto = models.TextField(null=True, blank=True)
     correo = models.EmailField(null=True, blank=True)
+    texto = models.TextField(null=True, blank=True)
     promocion = models.ForeignKey('Promocion', related_name='comentarios', null=False,
                                   on_delete=models.CASCADE)  # Promocion
 
@@ -72,7 +73,7 @@ class Promocion(models.Model):
     class Meta:
         verbose_name_plural = "promociones"
     def __str__(self):
-        return 'id:' + str(self.id)
+        return str(self.nombre)
 
     nombre = models.CharField(null=False, blank=False, max_length=250)
     descripcion = models.TextField(null=True, blank=True)

@@ -24,3 +24,4 @@ class PromocionSerializer(serializers.ModelSerializer):
         model = Promocion
         fields= ('id','nombre','descripcion','comentarios',)
         read_only_fields= ('comentarios',)
+    
