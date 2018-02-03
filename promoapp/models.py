@@ -75,22 +75,32 @@ class Ciudad(models.Model):
     nombre = models.CharField(null=False, blank=False, unique=True, max_length=60)
 
 
-
-class Comentario(models.Model):
-    def __str__(self):
-        return 'id:' + str(self.id)
-
-    correo = models.EmailField(null=True, blank=True)
-    texto = models.TextField(null=True, blank=True)
-    promocion = models.ForeignKey('Promocion', related_name='comentarios', null=False,
-                                  on_delete=models.CASCADE)  # Promocion
-
-
+# Promocion
 class Promocion(models.Model):
     class Meta:
         verbose_name_plural = "promociones"
+
     def __str__(self):
-        return str(self.nombre)
+        return self.nombre+" ("+str(self.id)+")"
 
     nombre = models.CharField(null=False, blank=False, max_length=250)
-    descripcion = models.TextField(null=True, blank=True)
+    descripcion = models.TextField(null=False, blank=False)
+    imagen = models.ImageField(null=True, blank=True)
+    precio = models.FloatField(null=False, blank=False)
+    fechaInicio = models.DateField(null=False, blank=False)
+    fechaFin = models.DateField(null=True, blank=True)
+    resumen = models.TextField(null=False, blank=False)
+    categoria = models.ForeignKey('Categoria', null=True, on_delete=models.CASCADE)
+    ciudad = models.ForeignKey('Ciudad', null=True, on_delete=models.CASCADE)
+
+
+# Comentario
+class Comentario(models.Model):
+    def __str__(self):
+        return self.correo + ':' + str(self.id)
+
+    texto = models.TextField(null=False, blank=False)
+    correo = models.EmailField(null=False, blank=False)
+    promocion = models.ForeignKey('Promocion', related_name='comentarios', null=True, on_delete=models.CASCADE)
+
+
