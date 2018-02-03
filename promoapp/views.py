@@ -6,11 +6,12 @@ from rest_framework import viewsets
 from .serializers import *
 from .models import *
 
+
 def index(request):
     return render(request, 'index.html')
 
-# App
 
+# App
 
 # Categoria
 class CategoriaViewSet(viewsets.ModelViewSet):
@@ -24,14 +25,13 @@ class CiudadViewSet(viewsets.ModelViewSet):
     serializer_class = CiudadSerializer
 
 
-# Comentario
-class ComentarioViewSet(viewsets.ModelViewSet):
-    queryset = Comentario.objects.all().order_by('-id')
-    serializer_class = ComentarioSerializer
-
-
 # Promocion
 class PromocionViewSet(viewsets.ModelViewSet):
     queryset = Promocion.objects.all().order_by('-id')
     serializer_class = PromocionSerializer
 
+
+# Comentario
+class ComentarioViewSet(viewsets.ModelViewSet):
+    queryset = Comentario.objects.all().order_by('-id')
+    serializer_class = ComentarioSerializer
