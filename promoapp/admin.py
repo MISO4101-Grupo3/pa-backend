@@ -37,5 +37,5 @@ class UserAdmin(DjangoUserAdmin):
 
 admin.site.register(Categoria)
 admin.site.register(Ciudad)
-admin.site.register(Comentario)
 admin.site.register(Promocion)
+admin.site.register(Comentario)
