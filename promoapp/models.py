@@ -39,8 +39,9 @@ class UserManager(UserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-
 class User(AbstractUser):
+    class Meta:
+        verbose_name_plural = "Usuarios"
     username = None
     email = models.EmailField(_('correo'), unique=True)
 
@@ -48,3 +49,32 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+
+class Categoria(models.Model):
+    def __str__(self):
+        return 'id:' + str(self.id)
+
+    descripcion = models.TextField(null=True, blank=True)
+    promociones = models.ForeignKey('Promocion', related_name='categoria', null=True,
+                                    on_delete=models.SET_NULL)  # Comentario
+
+
+class Comentario(models.Model):
+    def __str__(self):
+        return 'id:' + str(self.id)
+
+    texto = models.TextField(null=True, blank=True)
+    correo = models.EmailField(null=True, blank=True)
+    promocion = models.ForeignKey('Promocion', related_name='comentarios', null=True,
+                                  on_delete=models.CASCADE)  # Promocion
+
+
+class Promocion(models.Model):
+    class Meta:
+        verbose_name_plural = "promociones"
+    def __str__(self):
+        return 'id:' + str(self.id)
+
+    nombre = models.CharField(null=True, blank=True, max_length=250)
+    descripcion = models.TextField(null=True, blank=True)
