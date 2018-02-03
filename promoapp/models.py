@@ -42,9 +42,13 @@ class UserManager(UserManager):
 class User(AbstractUser):
     class Meta:
         verbose_name_plural = "Usuarios"
+
     username = None
     email = models.EmailField(_('correo'), unique=True)
-
+    foto = models.ImageField(null=True, blank=True)
+    direccion = models.CharField(null=True, blank=True, max_length=255)
+    pais = models.CharField(null=False, blank=False, max_length=100)
+    favoritas = models.ManyToManyField('Categoria', blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -52,11 +56,24 @@ class User(AbstractUser):
     objects = UserManager()
 
 
+# Categoria
 class Categoria(models.Model):
     def __str__(self):
-        return 'id:' + str(self.id)
+        return self.nombre
 
-    descripcion = models.CharField(null=False, blank=False, max_length=150, unique= True)
+    nombre = models.CharField(null=False, blank=False, unique=True, max_length=50)
+
+
+# Ciudad
+class Ciudad(models.Model):
+    class Meta:
+        verbose_name_plural = "ciudades"
+
+    def __str__(self):
+        return str(self.nombre)
+
+    nombre = models.CharField(null=False, blank=False, unique=True, max_length=60)
+
 
 
 class Comentario(models.Model):

@@ -9,7 +9,16 @@ from .models import *
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categoria
-        fields= ('id','descripcion')
+        fields= ('id','nombre',)
+        read_only_fields= ('id',)
+
+# Ciudad
+class CiudadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ciudad
+        fields= ('id', 'nombre',)
+        read_only_fields= ('id',)
+
 
 # Comentario
 class ComentarioSerializer(serializers.ModelSerializer):

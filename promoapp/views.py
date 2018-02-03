@@ -11,10 +11,17 @@ def index(request):
 
 # App
 
+
 # Categoria
 class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all().order_by('-id')
     serializer_class = CategoriaSerializer
+
+
+# Ciudad
+class CiudadViewSet(viewsets.ModelViewSet):
+    queryset = Ciudad.objects.all().order_by('-id')
+    serializer_class = CiudadSerializer
 
 
 # Comentario

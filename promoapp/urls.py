@@ -4,6 +4,7 @@ from .views import *
 
 router = DefaultRouter()
 router.register(r'categorias', CategoriaViewSet)
+router.register(r'ciudades', CiudadViewSet)
 router.register(r'comentarios', ComentarioViewSet)
 router.register(r'promociones', PromocionViewSet)
 
