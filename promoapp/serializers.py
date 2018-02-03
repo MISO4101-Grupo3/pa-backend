@@ -20,17 +20,18 @@ class CiudadSerializer(serializers.ModelSerializer):
         read_only_fields= ('id',)
 
 
-# Comentario
-class ComentarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comentario
-        fields= ('id','texto','correo','promocion')
-        read_only_fields= ()
-
 # Promocion
 class PromocionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Promocion
         fields= ('id','nombre','descripcion','comentarios',)
-        read_only_fields= ('comentarios',)
-    
+        read_only_fields= ('id',)
+
+# Comentario
+class ComentarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comentario
+        fields= ('id','texto','correo','promocion')
+
+        read_only_fields = ('id',)
+
