@@ -39,9 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    #CORS support
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,6 +58,7 @@ MIDDLEWARE = [
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 ROOT_URLCONF = 'MISO4101.urls'
@@ -149,3 +155,5 @@ STATICFILES_DIRS = (
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+CORS_ORIGIN_ALLOW_ALL = True
