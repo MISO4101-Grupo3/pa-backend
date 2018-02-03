@@ -55,9 +55,7 @@ class Categoria(models.Model):
     def __str__(self):
         return 'id:' + str(self.id)
 
-    descripcion = models.TextField(null=True, blank=True)
-    promociones = models.ForeignKey('Promocion', related_name='categoria', null=True,
-                                    on_delete=models.SET_NULL)  # Comentario
+    descripcion = models.CharField(null=False, blank=False, max_length=150, unique= True)
 
 
 class Comentario(models.Model):
@@ -66,7 +64,7 @@ class Comentario(models.Model):
 
     texto = models.TextField(null=True, blank=True)
     correo = models.EmailField(null=True, blank=True)
-    promocion = models.ForeignKey('Promocion', related_name='comentarios', null=True,
+    promocion = models.ForeignKey('Promocion', related_name='comentarios', null=False,
                                   on_delete=models.CASCADE)  # Promocion
 
 
@@ -76,5 +74,5 @@ class Promocion(models.Model):
     def __str__(self):
         return 'id:' + str(self.id)
 
-    nombre = models.CharField(null=True, blank=True, max_length=250)
+    nombre = models.CharField(null=False, blank=False, max_length=250)
     descripcion = models.TextField(null=True, blank=True)
