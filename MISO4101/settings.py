@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import dj_database_url
+from decouple import config
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -166,10 +167,11 @@ MEDIA_ROOT = os.path.normpath(os.path.join('static', 'media'))
 MEDIA_URL = '/media/'
 # END MEDIA CONFIGURATION
 
-AWS_STORAGE_BUCKET_NAME = 'miso4101'
-AWS_S3_REGION_NAME = 'us-east-1'  # e.g. us-east-2
-AWS_ACCESS_KEY_ID = 'AKIAJDJ2Q3VTHM5VDKCA'
-AWS_SECRET_ACCESS_KEY = 'ZukPMRzLoxf7Yy+L7b7LezqzeSWnV29dYUQz9YVE'
+# https://pypi.python.org/pypi/python-decouple#usage
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 
 # Tell django-storages the domain to use to refer to static files.
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
