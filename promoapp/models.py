@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.utils.translation import ugettext_lazy as _
 
-from promoapp.utils import Utils
+from promoapp.utils import *
 
 
 class UserManager(UserManager):
@@ -47,7 +47,7 @@ class User(AbstractUser):
 
     username = None
     email = models.EmailField(_('correo'), unique=True)
-    foto = models.ImageField(null=True, blank=True, upload_to=Utils.path_and_rename('uploads/'))
+    foto = models.ImageField(null=True, blank=True, upload_to=UploadToPathAndRename('uploads/'))
     direccion = models.CharField(null=True, blank=True, max_length=255)
     pais = models.CharField(null=False, blank=False, max_length=100)
     favoritas = models.ManyToManyField('Categoria', blank=True)
@@ -87,7 +87,7 @@ class Promocion(models.Model):
 
     nombre = models.CharField(null=False, blank=False, max_length=250)
     descripcion = models.TextField(null=False, blank=False)
-    imagen = models.ImageField(null=True, blank=True, upload_to=Utils.path_and_rename('uploads/'))
+    imagen = models.ImageField(null=True, blank=True, upload_to=UploadToPathAndRename('uploads/'))
     precio = models.FloatField(null=False, blank=False)
     fechaInicio = models.DateField(null=False, blank=False)
     fechaFin = models.DateField(null=True, blank=True)
