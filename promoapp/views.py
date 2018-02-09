@@ -44,6 +44,12 @@ class ComentarioViewSet(viewsets.ModelViewSet):
     serializer_class = ComentarioSerializer
 
 
+# Usuario
+class UsuarioViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-id')
+    serializer_class = UsuarioSerializer
+
+
 # Auth
 
 @api_view(['POST'])
@@ -57,6 +63,7 @@ def user_login(request):
         return Response({"token": token.key})
     else:
         return HttpResponseBadRequest()
+
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))

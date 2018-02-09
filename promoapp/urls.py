@@ -7,6 +7,9 @@ router.register(r'categorias', CategoriaViewSet)
 router.register(r'ciudades', CiudadViewSet)
 router.register(r'promociones', PromocionViewSet)
 router.register(r'comentarios', ComentarioViewSet)
+router.register(r'usuarios', UsuarioViewSet)
+
+
 
 urlpatterns = [
     url(r'^', include(router.urls)),

@@ -45,3 +45,4 @@ class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = ('password',)
+        read_only_fields = ('is_superuser','is_staff',)
