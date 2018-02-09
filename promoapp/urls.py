@@ -10,6 +10,8 @@ router.register(r'comentarios', ComentarioViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^auth/login', user_login),
+    url(r'auth/me',user_whoami),
 ]
 
 urlpatterns += router.urls

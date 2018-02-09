@@ -40,3 +40,8 @@ class ComentarioSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
         read_only_fields = ('id',)
+
+class UsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ('password',)
