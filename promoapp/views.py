@@ -50,6 +50,11 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer
 
 
+class RegistroUsuarioViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = RegistroUsuarioSerializer
+
+
 # Auth
 
 @api_view(['POST'])

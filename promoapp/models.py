@@ -49,6 +49,7 @@ class User(AbstractUser):
     email = models.EmailField(_('correo'), unique=True)
     foto = models.ImageField(null=True, blank=True, upload_to=UploadToPathAndRename('uploads/'))
     direccion = models.CharField(null=True, blank=True, max_length=255)
+    ciudad = models.ForeignKey('Ciudad', null=True, on_delete=models.CASCADE)
     pais = models.CharField(null=False, blank=False, max_length=100)
     favoritas = models.ManyToManyField('Categoria', blank=True)
 
