@@ -51,32 +51,25 @@ class UsuarioSerializer(serializers.ModelSerializer):
         fields = ('email','first_name','last_name','pais','ciudad','foto','direccion','password','favoritas')
         read_only_fields = ('is_superuser', 'is_staff', 'groups',
                             'user_permissions', 'last_login', 'date_joined', 'is_active')
-        extra_kwargs = {'password': {'write_only': True}}
+        # extra_kwargs = {'password': {'write_only': True}}
 
-        def create(self, validated_data):
-            now = timezone.now()
-            user = User(
-                email=validated_data['email'],
-                first_name=validated_data['first_name'],
-                last_name=validated_data['last_name'],
-                pais=validated_data['pais'],
-                ciudad=validated_data['ciudad'],
-                foto=validated_data['foto'],
-                direccion=validated_data['direccion'],
-                date_joined=now,
-                is_active=True,
-                is_superuser = True,
-                is_staff = True
-            )
+    def create(self, validated_data):
+        now = timezone.now()
 
-            user.set_password(validated_data['password'])
-            user.save()
-            return user
+        user = User(
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            pais=validated_data['pais'],
+            ciudad=validated_data['ciudad'],
+            foto=validated_data['foto'],
+            direccion=validated_data['direccion'],
+            date_joined=now,
+            is_active=True,
+            is_superuser=True,
+            is_staff=True
+        )
 
-        def get_permissions(self):
-
-            if self.action == 'create':
-                permission_classes = [IsAuthenticated]
-            else:
-                permission_classes = [IsAuthenticated]
-            return [permission() for permission in permission_classes]
+        user.set_password(validated_data['password'])
+        user.save()
+        return user

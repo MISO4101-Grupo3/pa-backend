@@ -47,14 +47,11 @@ class ComentarioViewSet(viewsets.ModelViewSet):
 
 
 # Usuario
-class UsuarioViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-id')
-    serializer_class = UsuarioSerializer
-
 @permission_classes((permissions.AllowAny,))
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UsuarioSerializer
+
 
 # Auth
 
