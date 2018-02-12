@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.utils import timezone
 from rest_framework import serializers
+from rest_framework.permissions import IsAuthenticated
+
 from .models import *
 
 
@@ -79,3 +81,11 @@ class RegistroUsuarioSerializer(serializers.ModelSerializer):
             user.set_password(validated_data['password'])
             user.save()
             return user
+
+        def get_permissions(self):
+
+            if self.action == 'create':
+                permission_classes = [IsAuthenticated]
+            else:
+                permission_classes = [IsAuthenticated]
+            return [permission() for permission in permission_classes]
