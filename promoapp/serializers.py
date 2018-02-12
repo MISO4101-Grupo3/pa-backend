@@ -48,7 +48,7 @@ class ComentarioSerializer(serializers.ModelSerializer):
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email','first_name','last_name','pais','ciudad','foto','direccion','password','favoritas')
+        fields = ('id','email','first_name','last_name','pais','ciudad','foto','direccion','password','favoritas')
         read_only_fields = ('is_superuser', 'is_staff', 'groups',
                             'user_permissions', 'last_login', 'date_joined', 'is_active')
         # extra_kwargs = {'password': {'write_only': True}}
