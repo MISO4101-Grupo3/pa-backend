@@ -44,18 +44,8 @@ class ComentarioSerializer(serializers.ModelSerializer):
 
         read_only_fields = ('id',)
 
+
 class UsuarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        exclude = ('password',)
-        read_only_fields = ('is_superuser','is_staff',)
-
-        def create(self, validated_data):
-            return User.objects.create(
-
-            )
-
-class RegistroUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('email','first_name','last_name','pais','ciudad','foto','direccion','password','favoritas')
@@ -78,6 +68,7 @@ class RegistroUsuarioSerializer(serializers.ModelSerializer):
                 is_superuser = True,
                 is_staff = True
             )
+
             user.set_password(validated_data['password'])
             user.save()
             return user

@@ -8,7 +8,6 @@ router.register(r'ciudades', CiudadViewSet)
 router.register(r'promociones', PromocionViewSet)
 router.register(r'comentarios', ComentarioViewSet)
 router.register(r'usuarios', UsuarioViewSet)
-router.register(r'registrousuarios', RegistroUsuarioViewSet)
 
 
 

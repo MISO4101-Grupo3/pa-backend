@@ -40,6 +40,7 @@ class PromocionViewSet(viewsets.ModelViewSet):
 
 
 # Comentario
+@permission_classes((permissions.AllowAny,))
 class ComentarioViewSet(viewsets.ModelViewSet):
     queryset = Comentario.objects.all().order_by('-id')
     serializer_class = ComentarioSerializer
@@ -51,9 +52,9 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer
 
 @permission_classes((permissions.AllowAny,))
-class RegistroUsuarioViewSet(viewsets.ModelViewSet):
+class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = RegistroUsuarioSerializer
+    serializer_class = UsuarioSerializer
 
 # Auth
 
