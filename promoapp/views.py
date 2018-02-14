@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from django.http import HttpResponseBadRequest, JsonResponse
@@ -10,7 +11,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+import django_filters.rest_framework
 from .serializers import *
 from .models import *
 
@@ -37,6 +38,9 @@ class CiudadViewSet(viewsets.ModelViewSet):
 class PromocionViewSet(viewsets.ModelViewSet):
     queryset = Promocion.objects.all().order_by('-id')
     serializer_class = PromocionSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('ciudad', 'categoria')
+
 
 
 # Comentario
