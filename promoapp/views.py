@@ -14,7 +14,7 @@ from rest_framework.views import APIView
 import django_filters.rest_framework
 from .serializers import *
 from .models import *
-
+from .utils import  *
 
 def index(request):
     return render(request, 'index.html')
@@ -55,6 +55,7 @@ class ComentarioViewSet(viewsets.ModelViewSet):
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UsuarioSerializer
+        
 
 
 # Auth

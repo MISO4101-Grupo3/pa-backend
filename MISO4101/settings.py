@@ -189,3 +189,5 @@ STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 
 MEDIAFILES_LOCATION = 'media'
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
+SENDGRID_API_KEY = config('SENDGRID_API_KEY')

@@ -4,6 +4,7 @@ from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
 
 from .models import *
+from .utils import *
 
 
 ## App
@@ -72,4 +73,5 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
         user.set_password(validated_data['password'])
         user.save()
+        send_email(user.email,"Registro","Gracias por registrarte en el proyecto del grupo 3","grupo3@promociones.com")
         return user
